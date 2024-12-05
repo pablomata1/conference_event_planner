@@ -116,9 +116,11 @@
   overflow-y: auto;
   z-index: 2;
   backdrop-filter: blur(5px);
+  display: none;
 }
 
 .event-list-container.visible {
+  display: block;
   top: 0;
 }
 
