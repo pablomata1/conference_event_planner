@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import "./TotalCost.css";
+import "../css/TotalCost.css";
 
 const TotalCost = ({ totalCosts, ItemsDisplay }) => {
   

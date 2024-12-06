@@ -248,7 +248,7 @@
   .table_item_data tbody tr:first-child:hover {
     background-color: transparent;
   }
-  navbar {
+  .navbar_event_conference {
     display: flex;
     justify-content: space-between;
     align-items: center;

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import "./ConferenceEvent.css";
+import "../css//ConferenceEvent.css";
 import TotalCost from "./TotalCost";
+import Navigation from "./NavBar";
 import { useSelector, useDispatch } from "react-redux";
 import { incrementQuantity, decrementQuantity } from "./venueSlice";
 import { incrementAvQuantity, decrementAvQuantity } from "./avSlice";
@@ -256,19 +257,9 @@ const ConferenceEvent = () => {
 //-----------------------------------RETURN---------------------------------------------------- 
   return (
     <>
-      <navbar className="navbar_event_conference">
-        <div className="company_logo">Conference Expense Planner</div>
-        <div className="left_navbar">
-          <div className="nav_links">
-            <a href="#venue" onClick={() => navigateToProducts("#venue")} >Venue</a>
-              <a href="#addons" onClick={() => navigateToProducts('#addons')}>Add-ons</a>
-            <a href="#meals" onClick={() => navigateToProducts('#meals')}>Meals</a>
-          </div>
-          <button className="details_button" onClick={handleToggleItems}>
-            Show Details
-          </button>
-        </div>
-      </navbar>
+      <div className="navbar_event_conference">
+        <Navigation handleToggleItems={handleToggleItems} navigateToProducts={navigateToProducts}/>
+      </div>
 
       <div className="main_container">
         {!showItems ? (
