@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../css//ConferenceEvent.css";
 import TotalCost from "./TotalCost";
 import Navigation from "./NavBar";
+import ItemsDisplay from "./ItemsDisplay";
 import { useSelector, useDispatch } from "react-redux";
 import { incrementQuantity, decrementQuantity } from "./venueSlice";
 import { incrementAvQuantity, decrementAvQuantity } from "./avSlice";
@@ -125,45 +126,6 @@ const ConferenceEvent = () => {
 
   const items = getItemsFromTotalCost();
 
-  //Component Items Display 
-  const ItemsDisplay = ({ items }) => {
-    console.log(items);
-    return( 
-      <>
-        <div className="display_box1">
-          {items.length === 0 && <p>No items selected</p>}
-          <table className="table_item_data">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Unit Cost</th>
-                <th>Quantity</th>
-                <th>Subtotal</th>
-              </tr>
-            </thead>
-            <tbody>
-              {items.map((item, index) => (
-                <tr key={index}>
-                  <td>{item.name}</td>
-                  <td>${item.cost}</td>
-                  <td>
-                    {item.type === "meals" || item.numberOfPeople
-                      ? ` For ${numberOfPeople} people`
-                      : item.quantity}
-                  </td>
-                  <td>{item.type === "meals" || item.numberOfPeople
-                      ? `${item.cost * numberOfPeople}`
-                      : `${item.cost * item.quantity}`}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-    </>
- )
-};
-
   const navigateToProducts = (idType) => {
     if (idType == '#venue' || idType == '#addons' || idType == '#meals') {
       if (showItems) { // Check if showItems is false
@@ -186,18 +148,14 @@ const ConferenceEvent = () => {
             <button
               className={venueItems[index].quantity === 0 ? "btn-warning btn-disabled" : " btn-warning"}
               onClick={() => handleRemoveFromCart(index)}
-            >
-            &#8211;
-            </button>
+            > &#8211; </button>
             <span className="selected_count">
               {item.quantity}
             </span>
             <button
               className={remainingAuditoriumQuantity === 0? "btn-success btn-disabled" : "btn-success"}
               onClick={() => handleAddToCart(index)}
-            >
-            &#43;
-            </button>
+            > &#43; </button>
           </>
         ) : (
         <div className="button_container">
@@ -208,7 +166,7 @@ const ConferenceEvent = () => {
           &#8211;
           </button>
           <span className="selected_count">
-            {venueItems[index].quantity > 0 ? ` ${venueItems[index].quantity}` : "0"}
+            {item.quantity}
           </span>
           <button
             className={venueItems[index].quantity === 10 ? " btn-success btn-disabled" : "btn-success btn-plus"}
@@ -314,10 +272,9 @@ const ConferenceEvent = () => {
           </div>
           ) : (
             <div className="total_amount_detail">
-            
               {/* The TotalCost component receives the props totalCosts and ItemsDisplay.
               The totalCosts prop contains cost data and the ItemsDisplay() component with items is passed as props to the TotalCost component. */}
-              <TotalCost totalCosts={totalCosts} handleClick={handleToggleItems} ItemsDisplay={()=> <ItemsDisplay items={items}/>}/>
+              <TotalCost totalCosts={totalCosts} handleClick={handleToggleItems} ItemsDisplay={()=> <ItemsDisplay items={items} numberOfPeople={numberOfPeople}/>}/>
             </div>
           )
         }
